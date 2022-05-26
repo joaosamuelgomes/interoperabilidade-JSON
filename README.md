@@ -14,7 +14,7 @@ Este projeto foi criado usando as seguintes tecnologias
 ## Como utilizar esse projeto 📦
 
 Esse é um projeto plug-and-play bastando apenas baixá-lo e usar uma extensão como o live-server por exemplo para subir a página web, o JavaScript da página faz todo o trabalho de configuração com o Firebase.
-Os processos existentes na página são os de inserção, seleção, atualização e deleção. E a idéia é a de um tipo de banco de dados que possui o nome, código, semestre e gênero do aluno.
+Os processos existentes na página são os de inserção, seleção, atualização e deleção. A idéia é a de um tipo de banco de dados que possui o nome, código, semestre e gênero do aluno.
 
 ### Inserção
 
