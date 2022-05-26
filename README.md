@@ -1,5 +1,5 @@
 <div align="center">
-  <h1> Interoperabilidade JSON (JS+HTML+Firebase) </h1>
+  <h1> Interoperabilidade JSON</h1>
   <p>Esse projeto foi desenvolvido durante a disciplina de Sistemas Distribuidos e tem como objetivo apresentar a interoperabilidade de um arquivo JSON a partir de um banco de dados Firebase. </p>
 </div>
 
