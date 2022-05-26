@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Interoperabilidade JSON</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <h2 class="titulo">Formulário JSON</h2>
+    <h4 class="subtitulo">Alunos: João Samuel Gomes e Jocemara Padilha</h4>
+    <p class="paragrafo">Esse trabalho tem o objetivo de a partir do banco de dados do firebase fazer as 4 operações básicas da crud com um arquivo JSON. para mais informações de como utilizá-lo visite a página do trabalho no <a target="_blank" href="https://github.com/joaosamuelgomes/interoperabilidade-JSON">GitHub</a>. </p>
+
+    <div class="formulario">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text"></input>
+        <label for="codigo">Codigo</label>
+        <input id="codigo" type="text"></input>
+        <label for="semestre">Semestre</label>
+        <input id="semestre" type="text"></input>
+        <label for="genero">Gênero</label>
+        <select id="genero">
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select>
+
+        <button id="insertBtn">Inserir</button>
+        <button id="selectBtn">Selecionar</button>
+        <button id="updateBtn">Atualizar</button>
+        <button id="deleteBtn">Deletar</button>
+    </div>
+
+    <script type="module">
+        // Importando funções
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+
+        // Configuração CDN Obtida a partir do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDxSeBx29JyrEwGl1UNYm5a90ttsWMSgcg",
+            authDomain: "interoperabilidadejson.firebaseapp.com",
+            projectId: "interoperabilidadejson",
+            storageBucket: "interoperabilidadejson.appspot.com",
+            messagingSenderId: "715784354530",
+            appId: "1:715784354530:web:74ab47b3cd67d6def7bcbb"
+        };
+
+        // Inicializando Firebase
+        const app = initializeApp(firebaseConfig);
+
+        // Importando funções
+        import { getDatabase, set, child, ref, get, update, remove } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-database.js";
+
+        const db = getDatabase();
+
+        // Referências
+
+        let Nome = document.getElementById("nome");
+        let Codigo = document.getElementById("codigo");
+        let Semestre = document.getElementById("semestre");
+        let Genero = document.getElementById("genero");
+
+        let InsertBtn = document.getElementById("insertBtn");
+        let SelectBtn = document.getElementById("selectBtn");
+        let UpdateBtn = document.getElementById("updateBtn");
+        let DeleteBtn = document.getElementById("deleteBtn");
+
+        // Função para inserir
+        function InsertData() {
+            set(ref(db, "Estudantes/" + Codigo.value), {
+                NomeEstudante: Nome.value,
+                CodigoEstudante: Codigo.value,
+                SemestreEstudante: Semestre.value,
+                GeneroEstudante: Genero.value
+            })
+                .then(() => {
+                    alert("Dados gravados com sucesso!");
+                })
+                .catch((error) => {
+                    alert("Erro na inserção: " + error);
+                })
+        }
+
+        // Função para selecionar
+        function SelectData() {
+            const dbref = ref(db);
+
+            get(child(dbref, 'Estudantes/' + Codigo.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    Nome.value = snapshot.val().NomeEstudante;
+                    Semestre.value = snapshot.val().SemestreEstudante;
+                    Genero.value = snapshot.val().GeneroEstudante;
+                }
+                else {
+                    alert("Dados não encontrados.");
+                }
+            })
+                .catch((error) => {
+                    alert("Erro na seleção: " + error);
+                });
+        }
+
+        // Função para atualizar
+        function UpdateData() {
+            update(ref(db, "Estudantes/" + Codigo.value), {
+                NomeEstudante: Nome.value,
+                SemestreEstudante: Semestre.value,
+                GeneroEstudante: Genero.value
+            })
+                .then(() => {
+                    alert("Dados alterados com sucesso!");
+                })
+                .catch((error) => {
+                    alert("Erro na atualização: " + error);
+                })
+        }
+
+        // Função para remover
+        function RemoveData() {
+            remove(ref(db, "Estudantes/" + Codigo.value), {
+                NomeEstudante: Nome.value,
+                SemestreEstudante: Semestre.value,
+                GeneroEstudante: Genero.value
+            })
+                .then(() => {
+                    alert("Dados removidos com sucesso!");
+                })
+                .catch((error) => {
+                    alert("Erro na atualização: " + error);
+                })
+        }
+
+        // Adicionado evento aos botões
+        InsertBtn.addEventListener('click', InsertData);
+        SelectBtn.addEventListener('click', SelectData);
+        UpdateBtn.addEventListener('click', UpdateData);
+        DeleteBtn.addEventListener('click', RemoveData);
+
+    </script>
+
+</body>
+
+</html>
