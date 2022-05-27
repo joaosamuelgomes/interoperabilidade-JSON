@@ -30,4 +30,4 @@ Para atualizar algo no banco de dados, você deve colocar os dados do nome, cód
 
 ### Deleção
 
-Para deletar algo no banco de dados, vvocê deve colocar os dados do código do aluno e após isso clicar no botão Deletar, isso irá remover o aluno cadastrado do banco de dados.
+Para deletar algo no banco de dados, você deve colocar os dados do código do aluno e após isso clicar no botão Deletar, isso irá remover o aluno cadastrado do banco de dados.
